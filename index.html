@@ -1,0 +1,2311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyecto de Estadística</title>
+
+  <link rel="stylesheet" href="estilos.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- MathJax Configuration for rendering math formulas clearly -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <div id="aviso-overlay">
+    <div id="aviso-modal">
+      <div class="aviso-icono">
+        <i class="fa-solid fa-circle-info"></i>
+      </div>
+      <span class="aviso-tag">Aviso</span>
+      <h2>Nota sobre el Proyecto</h2>
+      <p>
+        Este sitio tiene un propósito <strong>estrictamente académico</strong>
+        y se encuentra en proceso de construcción. Toda la información,
+        cifras y análisis aquí mostrados son empleados
+        <em>únicamente con fines de aprendizaje</em> y no representan
+        orientación ni consejo de carácter profesional.
+      </p>
+      <div class="aviso-divider"></div>
+      <button id="aviso-btn" onclick="cerrarAviso()">
+        <i class="fa-solid fa-check"></i>
+        Entendido
+      </button>
+      <p class="aviso-nota">Al continuar aceptas las condiciones del proyecto.</p>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="logo-box">
+        <img src="img/logofigempa.avif" alt="Logo FIGEMPA">
+      </div>
+      <h2>Proyecto <br>Estadístico</h2>
+      <p>Información del estado de Nueva York</p>
+    </div>
+
+    <button class="menu-toggle" id="menu-toggle">☰</button>
+
+    <nav class="side-nav">
+      <ul class="nav-links" id="nav-links">
+        <li><a onclick="navegar('inicio', this)" class="menu-link activo"><i class="fas fa-house"></i><span>Inicio</span></a></li>
+        <li><a onclick="navegar('introduccion', this)" class="menu-link"><i class="fas fa-book-open"></i><span>Introducción</span></a></li>
+        <li><a onclick="navegar('mapaweb', this)" class="menu-link"><i class="fas fa-map-location-dot"></i><span>Mapa Web</span></a></li>
+        <li><a onclick="navegar('descriptiva', this)" class="menu-link"><i class="fas fa-chart-column"></i><span>Descriptiva</span></a></li>
+        <li><a onclick="navegar('inferencial', this)" class="menu-link"><i class="fas fa-superscript"></i><span>Inferencial</span></a></li>
+        <li><a onclick="navegar('regresion', this)" class="menu-link"><i class="fas fa-chart-line"></i><span>Regresión</span></a></li>
+        <li><a onclick="navegar('machine', this)" class="menu-link"><i class="fas fa-microchip"></i><span>Machine Learning</span></a></li>
+
+        <li class="nav-mas" id="nav-mas">
+          <a onclick="toggleMasMenu(this, event)" class="menu-link menu-link-mas">
+            <i class="fas fa-ellipsis"></i><span>Más</span>
+            <i class="fas fa-chevron-down chevron-mas"></i>
+          </a>
+          <ul class="submenu-mas">
+            <li><a onclick="navegar('nosotros', this)" class="menu-link sub-link"><i class="fas fa-users"></i><span>Sobre nosotros</span></a></li>
+            <li><a onclick="navegar('herramientas', this)" class="menu-link sub-link"><i class="fas fa-toolbox"></i><span>Herramientas utilizadas</span></a></li>
+            <li><a onclick="navegar('conclusiones', this)" class="menu-link sub-link"><i class="fas fa-flag-checkered"></i><span>Conclusiones</span></a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+
+
+    <div id="seccion-inicio" class="pantalla pantalla-activa">
+      <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h1 class="hero-title-especial">Análisis estadístico aplicado a la regulación de pozos en el estado de Nueva York</h1>
+        </div>
+      </section>
+
+      <section class="section-box">
+        <div class="section-head center">
+          <h2>Misión y Visión</h2>
+          <p>Los pilares que guían el desarrollo de este proyecto estadístico.</p>
+        </div>
+
+        <div class="mv-grid">
+          <article class="mv-card">
+            <div class="mv-icono"><i class="fas fa-bullseye"></i></div>
+            <span class="mv-numero">01</span>
+            <h3>Misión</h3>
+            <p>
+              Aplicar métodos estadísticos rigurosos para identificar y cuantificar los factores que
+              explican la regulación, distribución y evolución histórica de los pozos de petróleo,
+              gas y otros tipos en el estado de Nueva York.
+            </p>
+          </article>
+
+          <article class="mv-card">
+            <div class="mv-icono"><i class="fas fa-eye"></i></div>
+            <span class="mv-numero">02</span>
+            <h3>Visión</h3>
+            <p>
+              Convertirnos en una referencia académica para el análisis estadístico de información
+              energética histórica, revelando tendencias reales y el potencial de los datos como
+              herramienta para la toma de decisiones informadas.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-box">
+        <div class="section-head center">
+          <h2>Motivación del proyecto</h2>
+        </div>
+
+        <div class="motivacion-grid">
+          <div class="motivacion-imagen">
+            <img src="img/WhatsApp Image 2026-05-06 at 12.23.21 AM.jpeg" alt="Facultad de Ingeniería en Geología, Minas, Petróleos y Ambiental — UCE">
+            <span class="motivacion-pin"><i class="fas fa-location-dot"></i> FIGEMPA</span>
+          </div>
+
+          <div class="motivacion-texto">
+            <span class="objetivo-kicker">Universidad Central del Ecuador</span>
+            <h3>¿Por qué este proyecto?</h3>
+            <p>
+              Como estudiantes de la Universidad Central del Ecuador, desarrollamos este proyecto con el
+              propósito de aplicar la <strong>estadística como herramienta fundamental</strong> en el análisis
+              de datos del mundo real.
+            </p>
+            <p>
+              Nuestro objetivo no es solo interpretar la información, sino también destacar la relevancia de
+              la estadística en la <em>toma de decisiones informadas</em> dentro del ámbito profesional
+              relacionado con nuestra carrera en geología, minas, petróleos y ambiental.
+            </p>
+            <a href="https://www.uce.edu.ec" target="_blank" rel="noopener" class="btn-primary">
+              <i class="fas fa-graduation-cap" style="margin-right:8px;"></i> Universidad Central del Ecuador
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <div id="seccion-introduccion" class="pantalla">
+      <section class="subhero" style="background-image: url('img/img1.jpeg');">
+        <div class="subhero-overlay"></div>
+        <div class="subhero-content">
+          <span class="section-tag">Punto de partida</span>
+          <h2>Introducción</h2>
+          <p>Contexto, ubicación geográfica y objetivos del proyecto.</p>
+        </div>
+      </section>
+
+      <section class="objetivos-editorial section-box">
+        <div class="objetivos-wrap">
+          <article class="bloque-principal">
+            <span class="objetivo-kicker">01 · Contexto</span>
+            <h2>Planteamiento del problema</h2>
+            <p>
+              El análisis de la industria de los hidrocarburos permite comprender la evolución y comportamiento de la actividad de extracción a través del tiempo. 
+              Mediante el estudio de variables como ubicación, profundidad y estado operativo de los pozos, 
+              es posible identificar tendencias y patrones útiles para futuras investigaciones
+            </p>
+            <p>
+              Como caso de estudio, se empleará la base histórica de pozos de hidrocarburos del estado de Nueva York,
+               con registros desde <strong>1860</strong>
+            </p>
+            <a href="https://catalog.data.gov/dataset/oil-gas-other-regulated-wells-beginning-1860" class="btn-primary"><i class="fas fa-database" style="margin-right:8px;"></i> Ver dataset</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="mapa-ubicacion section-box">
+        <div class="mapa-texto mapa-texto-especial">
+          <span class="section-tag">Visualización</span>
+          <h2 class="titulo-mapa-ubicacion">Mapa de ubicación</h2>
+          <p>
+            Explora el mapa con los controles de zoom o descárgalo en formato PDF para revisarlo en alta resolución.
+          </p>
+          <a href="https://drive.google.com/file/d/1oKwfxchZ1VBUlbr0KkMFFNA0LV70SpWU/view?usp=sharing"
+             target="_blank" rel="noopener" class="btn-mapa-especial">
+            <i class="fas fa-file-pdf" style="margin-right:10px;"></i> Descargar PDF.
+          </a>
+        </div>
+
+        <div class="mapa-imagen-wrap">
+          <div class="franja-mapa"></div>
+          <div class="mapa-imagen" id="mapa-zoom-wrap">
+            <div class="mapa-zoom-viewport" id="mapa-zoom-viewport">
+              <img src="img/WhatsApp Image 2026-06-09 at 2.35.24 PM.jpeg" alt="Mapa de ubicación" id="mapa-zoom-img">
+            </div>
+
+            <div class="zoom-controls" id="zoom-controls">
+              <button class="zoom-btn" type="button" onclick="ajustarZoom(-0.2)" title="Alejar">
+                <i class="fas fa-magnifying-glass-minus"></i>
+              </button>
+              <span class="zoom-nivel" id="zoom-nivel">100%</span>
+              <button class="zoom-btn" type="button" onclick="ajustarZoom(0.2)" title="Acercar">
+                <i class="fas fa-magnifying-glass-plus"></i>
+              </button>
+              <span class="zoom-sep"></span>
+              <button class="zoom-btn" type="button" onclick="resetZoom()" title="Restablecer">
+                <i class="fas fa-arrows-rotate"></i>
+              </button>
+              <button class="zoom-btn" type="button" onclick="abrirZoomFull()" title="Pantalla completa">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="objetivos-editorial section-box">
+        <div class="objetivos-wrap">
+          <div class="objetivos-grid">
+            <article class="bloque-secundario">
+              <span class="objetivo-kicker">02 · Dirección</span>
+              <h3>Objetivo general</h3>
+              <p>
+                Aplicar la estadística para examinar los pozos regulados de petróleo, 
+                gas y otros tipos en el estado de Nueva York desde 1860, mediante herramientas computacionales, 
+                con el fin de identificar su distribución, evolución temporal y características principales.
+              </p>
+            </article>
+
+            <article class="bloque-secundario">
+              <span class="objetivo-kicker">03 · Desarrollo</span>
+              <h3>Objetivos específicos</h3>
+              <ul class="lista-objetivos">
+                <li>Conocer la situación de los pozos regulados de petróleo, gas y otros tipos en el estado de Nueva York a través de sus características más importantes y medidas estadísticas.</li>
+                <li>Emplear un modelo de probabilidad para establecer conclusiones sobre los pozos regulados en el estado de Nueva York a partir de los resultados obtenidos de una muestra del conjunto de datos.</li>
+                <li>Deducir relaciones entre variables de los pozos regulados en el estado de Nueva York con el fin de realizar estimaciones y analizar tendencias a lo largo del tiempo.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <div id="seccion-mapaweb" class="pantalla">
+      <section class="subhero" style="background-image: url('img/img1.jpeg');">
+        <div class="subhero-overlay"></div>
+        <div class="subhero-content">
+          <span class="section-tag">Exploración web</span>
+          <h2>Mapa Web</h2>
+          <p>Visor interactivo de los datos espaciales del proyecto.</p>
+        </div>
+      </section>
+
+      <section class="mapa-interactivo section-box">
+        <div class="section-head center">
+          <span class="section-tag">QGIS2Web</span>
+          <h2>Visor interactivo</h2>
+          <p>Explora los datos espaciales por medio del visor web desarrollado para el proyecto.</p>
+        </div>
+
+        <div class="mapa-container">
+          <iframe src="qgis2web_2026_05_08-13_41_03_886782/index.html" title="Mapa Web QGIS Pozos"></iframe>
+        </div>
+      </section>
+    </div>
+
+
+    <div id="seccion-descriptiva" class="pantalla">
+      <section class="subhero" style="background-image: url('img/imagen2.jpg');">
+        <div class="subhero-overlay"></div>
+        <div class="subhero-content">
+          <span class="section-tag">Análisis</span>
+          <h2>Estadística Descriptiva</h2>
+          <p>Resumen conceptual y presentación inicial de variables, tablas y reportes.</p>
+        </div>
+      </section>
+
+      <section class="section-box">
+        <div class="section-head">
+          <span class="section-tag">Fundamentos</span>
+          <h2>Conceptos básicos</h2>
+          <p>Definiciones estadísticas aplicadas al proyecto de pozos regulados en Nueva York.</p>
+        </div>
+
+        <div class="conceptos-grid conceptos-grid-3">
+
+          <div class="tarjeta-concepto tarjeta-simbolica">
+            <div class="icono-tarjeta"><i class="fas fa-globe-americas"></i></div>
+            <h3>Población</h3>
+            <p>Todos los pozos regulados de petróleo, gas y otros tipos registrados en la base de datos desde 1860.</p>
+            <div class="bloque-simbolico">
+              <span class="titulo-simbolico">Simbólico</span>
+              <code>N = 34 469 pozos</code>
+              <span style="text-align:center; display:block; font-style:italic; margin: 4px 0;">o</span>
+              <code>P = &#123;x&#8321;, x&#8322;, x&#8323;, &hellip;, x&#8323;&#8324;&#8324;&#8326;&#8329;&#125;</code>
+              <span style="font-size: 0.82em; opacity: 0.8; display:block; margin-top: 6px;">
+                donde x<sub>i</sub> representa cada pozo registrado.
+              </span>
+            </div>
+          </div>
+
+          <div class="tarjeta-concepto tarjeta-simbolica">
+            <div class="icono-tarjeta"><i class="fas fa-filter"></i></div>
+            <h3>Muestra</h3>
+            <p>Conjunto de pozos utilizados para el análisis estadístico. En este caso coincide con todos los registros disponibles del dataset.</p>
+            <div class="bloque-simbolico">
+              <span class="titulo-simbolico">Simbólico</span>
+              <code>n = 34 469</code>
+              <span style="text-align:center; display:block; font-style:italic; margin: 4px 0;">o</span>
+              <code>M = &#123;x&#8321;, x&#8322;, x&#8323;, &hellip;, x&#8323;&#8324;&#8324;&#8326;&#8329;&#125;</code>
+            </div>
+          </div>
+
+          <div class="tarjeta-concepto tarjeta-simbolica">
+            <div class="icono-tarjeta"><i class="fas fa-circle-dot"></i></div>
+            <h3>Individuo</h3>
+            <p>Cada pozo de petróleo, gas u otro pozo regulado considerado de manera individual.</p>
+            <div class="bloque-simbolico">
+              <span class="titulo-simbolico">Simbólico</span>
+              <code>X<sub>i</sub></code>
+              <span style="font-size: 0.82em; opacity: 0.8; display:block; margin-top: 6px;">
+                donde i = 1, 2, 3, &hellip;, N
+              </span>
+            </div>
+          </div>
+
+          <div class="tarjeta-concepto">
+            <div class="icono-tarjeta"><i class="fas fa-clipboard-list"></i></div>
+            <h3>Caso de estudio</h3>
+            <p>
+              Análisis estadístico de los pozos regulados de petróleo, gas y otros tipos,
+              considerando sus características técnicas, geográficas y temporales.
+            </p>
+            <div class="bloque-simbolico">
+              <span class="titulo-simbolico">SIMBÓLICO</span>
+              <code>CE = f(Tipo de pozo, Estado, Profundidad, Ubicación, Fechas)</code>
+              <span class="texto-simple">o de forma más simple</span>
+              <code>CE = Análisis de los pozos regulados</code>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="section-box">
+        <div class="section-head">
+          <h2>Tabla de variables</h2>
+          <p>Registro de datos del Excel.</p>
+        </div>
+
+        <div class="tabla-contenedor">
+          <table class="tabla-datos">
+            <thead>
+              <tr>
+                <th>Nombre original</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Tipo</th>
+                <th>Subtipo</th>
+                <th>Dominio</th>
+                <th>Rango</th>
+                <th>Instrumento</th>
+                <th>Unidad</th>
+                <th>Escala</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>API_WELL_NUMBER</td>
+                <td>NUMERO_DE_POZO_API</td>
+                <td>Identificador principal del pozo.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = { x | x es un código API único de pozo }</td>
+                <td>R = { x | x ∈ códigos API registrados en el dataset }</td>
+                <td>Sistema regulatorio / base de datos</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>API_HOLE_NUMBER</td>
+                <td>NÚMERO_DE_ORIFICIO_API</td>
+                <td>Identificador del agujero específico dentro del pozo.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = { x | x es un número identificador de orificio }</td>
+                <td>R = { x | x ∈ códigos registrados en el dataset }</td>
+                <td>Registro técnico de perforación</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>WELL_NAME</td>
+                <td>NOMBRE_DEL_POZO</td>
+                <td>Denominación específica o nombre propio asignado al pozo.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = { x | x es el nombre asignado a un pozo }</td>
+                <td>R = { x | x ∈ nombres de pozos registrados en el dataset }</td>
+                <td>Registro operativo</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>COMPANY_NAME</td>
+                <td>NOMBRE_DE_LA_COMPAÑÍA</td>
+                <td>Nombre de la empresa propietaria o responsable.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = { x | x es el nombre de una compañía operadora }</td>
+                <td>R = { x | x ∈ nombres de compañías registradas }</td>
+                <td>Registro administrativo</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>OPERATOR_NUMBER</td>
+                <td>NÚMERO_DE_OPERADOR</td>
+                <td>Código asignado a la empresa operadora.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = { x | x es un código identificador de operador }</td>
+                <td>R = { x | 1 ≤ x ≤ 9999 }</td>
+                <td>Sistema institucional</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>DEC_DATABASE_LINK</td>
+                <td>ENLACE_A_LA_BASE_DE_DATOS_DEL_DEC</td>
+                <td>Enlace directo al registro oficial de la autoridad ambiental.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = { x | x es una URL válida del sistema DEC }</td>
+                <td>R = { x | x ∈ URLs registradas en el dataset }</td>
+                <td>Base digital institucional</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>COUNTY</td>
+                <td>CONDADO</td>
+                <td>Nombre del condado donde se ubica el pozo.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x es el nombre de un condado}</td>
+                <td>R = {x | x ∈ condados registrados en la base de datos}</td>
+                <td>Sistema cartográfico/GIS</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>COUNTY_CODE</td>
+                <td>CÓDIGO_DEL_CONDADO</td>
+                <td>Clave numérica asignada al condado de ubicación.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x es un código numérico asignado a un condado}</td>
+                <td>R = {x | x ∈ códigos de condado registrados}</td>
+                <td>Catálogo oficial</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>TOWN</td>
+                <td>MUNICIPIO</td>
+                <td>Localidad donde se encuentra el pozo.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x es el nombre de una ciudad o municipio}</td>
+                <td>R = {x | x ∈ municipios registrados en el dataset}</td>
+                <td>Referencia geográfica</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>REGION</td>
+                <td>REGIÓN</td>
+                <td>Zona administrativa o geográfica asignada.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x es una región geográfica válida}</td>
+                <td>R = {x | x ∈ regiones registradas}</td>
+                <td>Base geográfica</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>QUAD</td>
+                <td>CUADRANTE</td>
+                <td>Nombre del cuadrante del mapa.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x es el nombre de un cuadrante cartográfico}</td>
+                <td>R = {x | x ∈ cuadrantes registrados}</td>
+                <td>Mapa topográfico</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>QUAD_SECTION</td>
+                <td>SECCIÓN_DEL_CUADRANTE</td>
+                <td>Sección específica dentro del cuadrante.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {NE, NW, SE, SW}</td>
+                <td>R = {x | x ∈ {NE, NW, SE, SW}}</td>
+                <td>Cartografía / Planos de cuadrícula</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>SURFACE_LONGITUDE</td>
+                <td>LONGITUD_DE_LA_SUPERFICIE</td>
+                <td>Coordenadas geográficas del punto de entrada de la superficie.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x ∈ ℝ | −180 ≤ x ≤ 180}</td>
+                <td>R = {x ∈ ℝ | −79.7423 ≤ x ≤ −77.7440}</td>
+                <td>GPS / SIG</td>
+                <td>Grados decimales</td>
+                <td>Intervalo</td>
+              </tr>
+              <tr>
+                <td>BOTTOM_HOLE_LONGITUDE</td>
+                <td>LONGITUD_DEL_FONDO_DEL_POZO</td>
+                <td>Ubicación geográfica en el punto final de la superficie.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x ∈ ℝ | −180 ≤ x ≤ 180}</td>
+                <td>R = {x ∈ ℝ | −79.7423 ≤ x ≤ −77.7440}</td>
+                <td>GPS / SIG</td>
+                <td>Grados decimales</td>
+                <td>Intervalo</td>
+              </tr>
+              <tr>
+                <td>BOTTOM_HOLE_LATITUDE</td>
+                <td>LATITUD_DEL_FONDO_DEL_POZO</td>
+                <td>Coordenadas geográficas del punto final en la superficie.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x ∈ ℝ | −90 ≤ x ≤ 90}</td>
+                <td>R = {x ∈ ℝ | 42.0060 ≤ x ≤ 42.5167}</td>
+                <td>GPS / SIG</td>
+                <td>Grados decimales</td>
+                <td>Intervalo</td>
+              </tr>
+              <tr>
+                <td>LOCATION_1</td>
+                <td>UBICACIÓN_1</td>
+                <td>Referencia textual de la ubicación física.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x es una ubicación geográfica textual}</td>
+                <td>R = {x | x ∈ ubicaciones registradas en la base de datos}</td>
+                <td>Descripción de campo / GPS</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>GEOREFERENCE</td>
+                <td>GEORREFERENCIA</td>
+                <td>Datos combinados para representación en sistemas GIS.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x es una referencia geográfica}</td>
+                <td>R = {x | x ∈ Datos geoespaciales en la hoja de datos}</td>
+                <td>Sistema GIS</td>
+                <td>Grados decimales</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>MAP_SYMBOL</td>
+                <td>SÍMBOLO_DEL_MAPA</td>
+                <td>Icono gráfico utilizado para representar el pozo en mapas.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x ∈ Símbolos cartográficos de mapa}</td>
+                <td>R = {x | x ∈ símbolos cartográficos registrados}</td>
+                <td>Cartografía digital</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>WELL_STATUS</td>
+                <td>ESTADO_DEL_POZO</td>
+                <td>Estado operativo actual (ej. activo, inactivo, sellado).</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Ordinal</td>
+                <td>D = {x | x es un estado válido del pozo}</td>
+                <td>R = {AR, PI, DG, DC, DD, CO, AC, SI, IN, TA, PB, PM, PA, TR, RE, CA, VP, EX, RW, NR, UL, UM, UN, Confidential}</td>
+                <td>Reporte operativo</td>
+                <td>No aplica</td>
+                <td>Ordinal</td>
+              </tr>
+              <tr>
+                <td>STATUS_DATE</td>
+                <td>FECHA_DE_ESTADO</td>
+                <td>Día en que se registró el último cambio en la situación operativa.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Discreta</td>
+                <td>D = {x | x ∈ DD/MM/AAAA}</td>
+                <td>R = { x | 28/11/1911 ≤ x ≤ 11/09/2026 }</td>
+                <td>Sistema de monitoreo</td>
+                <td>No aplica</td>
+                <td>Intervalo</td>
+              </tr>
+              <tr>
+                <td>PERMIT_APPLICATION_DATE</td>
+                <td>FECHA_DE_SOLICITUD_DE_PERMISO</td>
+                <td>Data de la solicitud del permiso de perforación.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Discreta</td>
+                <td>D = {x | x ∈ DD/MM/AAAA}</td>
+                <td>R = { x | 30/06/1966 ≤ x ≤ 31/03/2026 }</td>
+                <td>Registro regulatorio</td>
+                <td>No aplica</td>
+                <td>Intervalo</td>
+              </tr>
+              <tr>
+                <td>PERMIT_ISSUED_DATE</td>
+                <td>FECHA_DE_EMISIÓN_DEL_PERMISO</td>
+                <td>Momento en que la autoridad otorgó el permiso oficial de ejecución.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Discreta</td>
+                <td>D = {x | x ∈ DD/MM/AAAA}</td>
+                <td>R = { x | 03/02/1956 ≤ x ≤ 01/04/2026 }</td>
+                <td>Entidad reguladora</td>
+                <td>No aplica</td>
+                <td>Intervalo</td>
+              </tr>
+              <tr>
+                <td>DATE_SPUDDED</td>
+                <td>FECHA_DE_INICIO_DE_LA_PERFORACIÓN</td>
+                <td>Día exacto en que comenzó la perforación física.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Discreta</td>
+                <td>D = {x | x ∈ DD/MM/AAAA}</td>
+                <td>R = { x | 01/01/1870 ≤ x ≤ 17/04/2026 }</td>
+                <td>Reporte de perforación</td>
+                <td>No aplica</td>
+                <td>Intervalo</td>
+              </tr>
+              <tr>
+                <td>DATE_OF_TOTAL_DEPTH</td>
+                <td>FECHA_DE_PROFUNDIDAD_TOTAL</td>
+                <td>Momento en el que alcanzó el punto más profundo proyectado.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Discreta</td>
+                <td>D = {x | x ∈ DD/MM/AAAA}</td>
+                <td>R = { x | 26/08/1881 ≤ x ≤ 04/08/2026 }</td>
+                <td>Registro técnico</td>
+                <td>No aplica</td>
+                <td>Intervalo</td>
+              </tr>
+              <tr>
+                <td>DATE_WELL_COMPLETED</td>
+                <td>FECHA_DE_FINALIZACIÓN_DEL_POZO</td>
+                <td>Jornada en la que el pozo quedó listo para entrar en fase de producción.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Discreta</td>
+                <td>D = {x | x ∈ DD/MM/AAAA}</td>
+                <td>R = { x | 12/06/1879 ≤ x ≤ 20/11/2026 }</td>
+                <td>Informe operativo</td>
+                <td>No aplica</td>
+                <td>Intervalo</td>
+              </tr>
+              <tr>
+                <td>DATE_WELL_PLUGGED</td>
+                <td>FECHA_DE_SELLADO_DEL_POZO</td>
+                <td>Registro de cuándo se realizó el sellado definitivo.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Discreta</td>
+                <td>D = {x | x ∈ DD/MM/AAAA}</td>
+                <td>R = { x | 28/11/1911 ≤ x ≤ 07/04/2026 }</td>
+                <td>Registro de clausura</td>
+                <td>No aplica</td>
+                <td>Intervalo</td>
+              </tr>
+              <tr>
+                <td>DATE_LAST_MODIFIED</td>
+                <td>FECHA_DE_ÚLTIMA_MODIFICACIÓN</td>
+                <td>Última actualización en la base de datos.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Ordinal</td>
+                <td>D = {x | x ∈ DD/MM/AAAA}</td>
+                <td>R = { x | 01/01/1900 ≤ x ≤ 09/04/2026 }</td>
+                <td>Base de datos institucional</td>
+                <td>No aplica</td>
+                <td>Ordinal</td>
+              </tr>
+              <tr>
+                <td>WELL_TYPE</td>
+                <td>TIPO_DE_POZO</td>
+                <td>Clasificación según la función (ej. petróleo, gas, observación o inyección).</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x ∈ Tipos de pozos}</td>
+                <td>R = {BRINE, GAS, OIL, STORAGE, STRATIGRAPHIC, TEST, WATER, OTHER}</td>
+                <td>Clasificación técnica</td>
+                <td>No aplica</td>
+                <td>Ordinal</td>
+              </tr>
+              <tr>
+                <td>ORIGINAL_WELL_TYPE</td>
+                <td>TIPO_DE_POZO_ORIGINAL</td>
+                <td>Clasificación original del pozo al ser perforado.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x es un tipo original de pozo}</td>
+                <td>R = {BRINE, GAS, OIL, STORAGE, TEST, WATER, OTHER}</td>
+                <td>Registro histórico</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>SIDETRACK</td>
+                <td>DESVÍO</td>
+                <td>Indicador que señala si el pozo presenta una desviación lateral o perforación secundaria durante las operaciones.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {si, no}</td>
+                <td>R = {si, no}</td>
+                <td>Registro de perforación</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>COMPLETION</td>
+                <td>TERMINACIÓN</td>
+                <td>Código de la terminación del pozo.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {si, no}</td>
+                <td>R = {si, no}</td>
+                <td>Informe técnico</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>SLANT</td>
+                <td>INCLINACIÓN</td>
+                <td>Trayectoria del pozo (vertical, direccional u horizontal).</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x ∈ {vertical, direccional, horizontal}}</td>
+                <td>R = {vertical, direccional, horizontal}</td>
+                <td>Sistema de perforación</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>PROPOSED_DEPTH_FT</td>
+                <td>LONGITUD_DE_LA_SUPERFICIE_PIES</td>
+                <td>Profundidad proyectada originalmente (en pies).</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x ∈ ℝ | x ≥ 0}</td>
+                <td>R = {x ∈ ℝ | 0 ≤ x ≤ 27,500}</td>
+                <td>Plan de perforación</td>
+                <td>Pies (ft)</td>
+                <td>Razón</td>
+              </tr>
+              <tr>
+                <td>TRUE_VERTICAL_DEPTH_FT</td>
+                <td>PROFUNDIDAD_VERTICAL_REAL_PIES</td>
+                <td>Distancia vertical real desde la superficie al fondo.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x ∈ ℝ | x ≥ 0}</td>
+                <td>R = {x ∈ ℝ | 0 ≤ x ≤ 27,500}</td>
+                <td>Sensor/profundímetro</td>
+                <td>Pies (ft)</td>
+                <td>Razón</td>
+              </tr>
+              <tr>
+                <td>MEASURED_DEPTH_FT</td>
+                <td>PROFUNDIDAD_MEDIDA_PIES</td>
+                <td>Longitud total del trayecto perforado (incluye curvas).</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x ∈ ℝ | x ≥ 0}</td>
+                <td>R = {x ∈ ℝ | 0 ≤ x ≤ 30,000}</td>
+                <td>Instrumentos de perforación</td>
+                <td>Pies (ft)</td>
+                <td>Razón</td>
+              </tr>
+              <tr>
+                <td>KICKOFF_FT</td>
+                <td>PUNTO_DE_INICIO_PIES</td>
+                <td>Profundidad donde se inicia la desviación de un pozo vertical.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x ∈ ℝ | x ≥ 0}</td>
+                <td>R = { x | 0 ≤ x ≤ 9090 }</td>
+                <td>Sistema direccional</td>
+                <td>Pies (ft)</td>
+                <td>Razón</td>
+              </tr>
+              <tr>
+                <td>DRILLED_DEPTH_FT</td>
+                <td>PROFUNDIDAD_PERFORADA_PIES</td>
+                <td>Profundidad final alcanzada durante la perforación.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x ∈ ℝ | x ≥ 0}</td>
+                <td>R = { x | 0 ≤ x ≤ 11680 }</td>
+                <td>Equipo de perforación</td>
+                <td>Pies (ft)</td>
+                <td>Razón</td>
+              </tr>
+              <tr>
+                <td>ELEVATION_FT</td>
+                <td>ELEVACIÓN_PIES</td>
+                <td>Altura del pozo sobre el nivel medio del mar.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x | x ∈ ℝ}</td>
+                <td>R = { x | 3 ≤ x ≤ 2977 }</td>
+                <td>GPS / altímetro</td>
+                <td>Pies (ft)</td>
+                <td>Razón</td>
+              </tr>
+              <tr>
+                <td>PRODUCING_FIELD</td>
+                <td>CAMPO_PRODUCTOR</td>
+                <td>Nombre del campo petrolero.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x ∈ Nombres de campos petroleros}</td>
+                <td>R = {x | x ∈ campos productores registrados en el dataset}</td>
+                <td>Registro geológico</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>PRODUCING_FORMATION</td>
+                <td>FORMACIÓN_PRODUCTORA</td>
+                <td>Capa geológica de la cual se extrae el recurso.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x ∈ Formaciones geológicas}</td>
+                <td>R = {x | x ∈ Formaciones geológicas}</td>
+                <td>Estudios geológicos</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>OBJECTIVE_FORMATION</td>
+                <td>FORMACIÓN_OBJETIVO</td>
+                <td>Formación geológica que se busca alcanzar.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x ∈ Formaciones geológicas objetivo}</td>
+                <td>R = {x | x ∈ Formaciones geológicas objetivo registradas}</td>
+                <td>Plan geológico</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>PERMIT_FEE</td>
+                <td>TARIFA_DE_PERMISO</td>
+                <td>Monto pagado por los derechos de permiso.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x | x ≥ 0}</td>
+                <td>R = { x | 0 ≤ x ≤ 11000 }</td>
+                <td>Sistema financiero</td>
+                <td>Dólares (USD)</td>
+                <td>Razón</td>
+              </tr>
+              <tr>
+                <td>DEPTH_FEE</td>
+                <td>TARIFA_DE_PROFUNDIDAD</td>
+                <td>Tasa pagada basada en la profundidad del pozo.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x | x ≥ 0}</td>
+                <td>R = { x | 0 ≤ x ≤ 10900 }</td>
+                <td>Registro económico</td>
+                <td>Dólares (USD)</td>
+                <td>Razón</td>
+              </tr>
+              <tr>
+                <td>FINANCIAL_SECURITY</td>
+                <td>SEGURIDAD_FINANCIERA</td>
+                <td>Descripción del tipo de garantía financiera.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {True, False}</td>
+                <td>R = {True, False}</td>
+                <td>Registro regulatorio</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>STATE_LEASE</td>
+                <td>CONTRATO_DE_ARRENDAMIENTO_ESTATAL</td>
+                <td>Identificador del contrato de arrendamiento con el estado.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x ∈ Identificadores de contratos}</td>
+                <td>R = {x | x ∈ Identificadores de contratos}</td>
+                <td>Registro contractual</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>SPACING</td>
+                <td>ESPACIAMIENTO</td>
+                <td>Regulación de distancia mínima entre pozos.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x describe el tipo de espaciamiento}</td>
+                <td>R = {Conforms to statewide spacing under Title 5, Exempt from Title 5, Exempt - not an oil or gas well, Non-statutory unit under Title 5, Unit established by order prior to August 2, 2005}</td>
+                <td>Regulación petrolera</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>SPACING_ACRES</td>
+                <td>SUPERFICIE_DE_ESPACIAMIENTO_(ACRES)</td>
+                <td>Normativa y superficie en acres que debe haber entre unidades para evitar interferencias.</td>
+                <td><span class="badge cuantitativa">Cuantitativa</span></td>
+                <td>Continua</td>
+                <td>D = {x | x &gt; 0}</td>
+                <td>R = { x | 39.99 ≤ x ≤ 639.94 }</td>
+                <td>Sistema territorial</td>
+                <td>Acres</td>
+                <td>Razón</td>
+              </tr>
+              <tr>
+                <td>INTEGRATION</td>
+                <td>INTEGRACIÓN</td>
+                <td>Estado de la integración de derechos minerales.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x ∈ Estados de integración de derechos}</td>
+                <td>R = {x | x ∈ Estados de integración de derechos}</td>
+                <td>Registro regulatorio</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+              <tr>
+                <td>HEARING_DATE</td>
+                <td>FECHA_DE_AUDIENCIA</td>
+                <td>Día de la sesión pública para tratar asuntos legales o disputas.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Ordinal</td>
+                <td>D = {x | x ∈ DD/MM/AAAA}</td>
+                <td>R = { x | 16/05/2006 ≤ x ≤ 08/04/2009 }</td>
+                <td>Entidad reguladora</td>
+                <td>No aplica</td>
+                <td>Ordinal</td>
+              </tr>
+              <tr>
+                <td>DATE_WELL_CONFIDENTIALITY_ENDS</td>
+                <td>FECHA_DE_FINALIZACIÓN_DE_LA_CONFIDENCIALIDAD_DEL_POZO</td>
+                <td>Plazo límite tras el cual los datos técnicos pasan a ser de dominio público.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Ordinal</td>
+                <td>D = {x | x ∈ DD/MM/AAAA}</td>
+                <td>R = { x | 08/09/1916 ≤ x ≤ 17/10/2026 }</td>
+                <td>Sistema administrativo</td>
+                <td>No aplica</td>
+                <td>Ordinal</td>
+              </tr>
+              <tr>
+                <td>CONFIDENTIALITY_CODE</td>
+                <td>CÓDIGO_DE_CONFIDENCIALIDAD</td>
+                <td>Código que define el nivel de reserva de la información.</td>
+                <td><span class="badge cualitativa">Cualitativa</span></td>
+                <td>Nominal</td>
+                <td>D = {x | x ∈ Códigos de nivel de confidencialidad}</td>
+                <td>R = {x | x ∈ {C, N, E, X, …}}</td>
+                <td>Registro institucional</td>
+                <td>No aplica</td>
+                <td>Nominal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section-box">
+        <div class="section-head">
+          <span class="section-tag">Datos</span>
+          <h2>Variables y Reportes Descriptivos</h2>
+          <p>Análisis estadístico descriptivo individualizado en RPubs.</p>
+        </div>
+
+        <div class="variables-grupo">
+          <h3>Variables Cualitativas</h3>
+          
+          <h4>Nominales</h4>
+          <div class="rpubs-grid">
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>CONDADO</h3>
+              <p>Análisis cualitativo nominal por condado en el Estado de Nueva York.</p>
+              <a href="https://rpubs.com/jennycord/c0UNTY" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>MUNICIPIOS</h3>
+              <p>Distribución cualitativa nominal por municipios.</p>
+              <a href="https://rpubs.com/jennycord/town_" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>REGIÓN</h3>
+              <p>Clasificación regional de pozos regulados.</p>
+              <a href="https://rpubs.com/jennycord/region_" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>CUADRANTE</h3>
+              <p>Ubicación por cuadrantes de mapa.</p>
+              <a href="https://rpubs.com/jennycord/quad_" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>TIPO DE POZO</h3>
+              <p>Clasificación según la función técnica del pozo.</p>
+              <a href="https://rpubs.com/jennycord/quad_sectionquad_sectio" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>SECCIÓN DEL CUADRANTE</h3>
+              <p>Subdivisión de cuadrante cartográfico.</p>
+              <a href="https://rpubs.com/jennycord/map_symbol_" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>TERMINACIÓN</h3>
+              <p>Tipo de terminación física registrada.</p>
+              <a href="https://rpubs.com/jennycord/1447274" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>INCLINACIÓN</h3>
+              <p>Dirección e inclinación del pozo.</p>
+              <a href="https://rpubs.com/jennycord/slant" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>CAMPO PRODUCTOR</h3>
+              <p>Campo petrolífero o gasífero asignado.</p>
+              <a href="https://rpubs.com/jennycord/producing_field" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>FORMACIÓN PRODUCTORA</h3>
+              <p>Formación geológica en explotación.</p>
+              <a href="https://rpubs.com/jennycord/producing_formation" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>FORMACIÓN OBJETIVOS</h3>
+              <p>Formaciones geológicas objetivo de perforación.</p>
+              <a href="https://rpubs.com/jennycord/formaciones_obj" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>SEGURIDAD FINANCIERA</h3>
+              <p>Estatus de cobertura y garantía financiera.</p>
+              <a href="https://rpubs.com/jennycord/financial_security" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>ESPACIAMIENTO</h3>
+              <p>Normativa de espaciamiento regulatorio.</p>
+              <a href="https://rpubs.com/jennycord/spacing" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>INTEGRACIÓN</h3>
+              <p>Estado de los acuerdos de integración.</p>
+              <a href="https://rpubs.com/jennycord/integration" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Nominal</span>
+              <h3>SÍMBOLOS DEL MAPA</h3>
+              <p>Clasificación de simbología cartográfica.</p>
+              <a href="https://rpubs.com/jennycord/map_symbol_" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+          </div>
+
+          <h4>Ordinales</h4>
+          <div class="rpubs-grid">
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Ordinal</span>
+              <h3>ESTADO DEL POZO</h3>
+              <p>Estatus operativo del pozo.</p>
+              <a href="https://rpubs.com/eduloayza41/1447339" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Ordinal</span>
+              <h3>FECHA DE AUDIENCIA</h3>
+              <p>Registro temporal de audiencias regulatorias.</p>
+              <a href="https://rpubs.com/Dally/1447630" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Ordinal</span>
+              <h3>CONFIDENCIALIDAD DEL POZO</h3>
+              <p>Fecha de finalización de confidencialidad.</p>
+              <a href="https://rpubs.com/Dally/1447629" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Ordinal</span>
+              <h3>FECHA DE ESTADO</h3>
+              <p>Fecha de actualización de estado.</p>
+              <a href="https://rpubs.com/eduloayza41/1448864" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Ordinal</span>
+              <h3>SOLICITUD DE PERMISO</h3>
+              <p>Fecha de ingreso de la solicitud.</p>
+              <a href="https://rpubs.com/Dally/1447623" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Ordinal</span>
+              <h3>EMISIÓN DEL PERMISO</h3>
+              <p>Fecha de otorgamiento del permiso.</p>
+              <a href="https://rpubs.com/Dally/1447621" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Ordinal</span>
+              <h3>INICIO DE PERFORACIÓN</h3>
+              <p>Fecha de inicio de la perforación.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447535" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Ordinal</span>
+              <h3>PROFUNDIDAD TOTAL</h3>
+              <p>Fecha en que alcanzó la profundidad final.</p>
+              <a href="https://rpubs.com/Dally/1447626" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Ordinal</span>
+              <h3>FINALIZACIÓN DEL POZO</h3>
+              <p>Fecha de término de perforación.</p>
+              <a href="https://rpubs.com/Dally/1447627" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Ordinal</span>
+              <h3>SELLADO DEL POZO</h3>
+              <p>Fecha de sellado o abandono oficial.</p>
+              <a href="https://rpubs.com/Dally/1447628" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+          </div>
+        </div>
+
+        <div class="variables-grupo">
+          <h3>Variables Cuantitativas</h3>
+
+          <h4>Continuas</h4>
+          <div class="rpubs-grid">
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>PUNTO DE INICIO (PIES)</h3>
+              <p>Profundidad donde se inicia la desviación del pozo.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447535" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>ELEVACIÓN EN PIES</h3>
+              <p>Altura del pozo sobre el nivel del mar en pies.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447536" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>PROFUNDIDAD PERFORADA (PIES)</h3>
+              <p>Medición continua de pies perforados.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447561" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>PROFUNDIDAD MEDIDA (PIES)</h3>
+              <p>Longitud total medida del trayecto.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447565" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>PROFUNDIDAD VERTICAL REAL</h3>
+              <p>Distancia vertical verdadera en pies.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447567" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>LONGITUD DE SUPERFICIE</h3>
+              <p>Proyección de superficie del pozo.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447882" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>TARIFA DE PERMISO</h3>
+              <p>Costo administrativo del permiso.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447570" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>TARIFA DE PROFUNDIDAD</h3>
+              <p>Arancel en dólares por profundidad.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447572" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>SUPERFICIE ESPACIAMIENTO</h3>
+              <p>Área en acres de espaciamiento.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447577" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>LONGITUD DE SUPERFICIE</h3>
+              <p>Extensión longitudinal en superficie.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447882" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>LONGITUD DEL FONDO</h3>
+              <p>Coordenada de longitud del fondo del pozo.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447883" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Continua</span>
+              <h3>LATITUD DEL FONDO</h3>
+              <p>Coordenada de latitud del fondo del pozo.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1447884" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+          </div>
+
+          <h4>Discretas</h4>
+          <div class="rpubs-grid">
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Discreta</span>
+              <h3>DÉCADA DE FINALIZACIÓN</h3>
+              <p>Agrupación histórica por décadas de cierre.</p>
+              <a href="https://rpubs.com/eduloayza41/1447865" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Discreta</span>
+              <h3>MES DE FINALIZACIÓN</h3>
+              <p>Mes del año de término operacional.</p>
+              <a href="https://rpubs.com/eduloayza41/1447862" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Discreta</span>
+              <h3>DESVÍO</h3>
+              <p>Medida discreta de desvíos en pozo.</p>
+              <a href="https://rpubs.com/eduloayza41/1447873" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Discreta</span>
+              <h3>DÍA FINALIZACIÓN CORREGIDO</h3>
+              <p>Día ajustado de término de obra.</p>
+              <a href="https://rpubs.com/Dally/1447493" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+
+    <div id="seccion-inferencial" class="pantalla">
+      <section class="subhero" style="background-image: url('img/img22.jpeg');">
+        <div class="subhero-overlay"></div>
+        <div class="subhero-content">
+          <span class="section-tag">Modelado</span>
+          <h2>Estadística Inferencial</h2>
+          <p>Pruebas de hipótesis, estimación de parámetros e inferencia sobre pozos regulados.</p>
+        </div>
+      </section>
+
+      <section class="section-box">
+        <div class="section-head">
+          <span class="section-tag">Análisis</span>
+          <h2>Tarjetas de Inferencia Estadística</h2>
+          <p>Reportes de inferencia aplicados a las variables cuantitativas y cualitativas del proyecto.</p>
+        </div>
+
+        <div class="variables-grupo">
+          <h3>Variables Cualitativas</h3>
+          
+          <h4>Ordinales</h4>
+          <div class="rpubs-grid">
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Ordinal</span>
+              <h3>ESTADO DEL POZO</h3>
+              <p>Inferencia sobre el estado actual de cada pozo.</p>
+              <a href="https://rpubs.com/Dally/1449034" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Ordinal</span>
+              <h3>FECHA DE AUDIENCIA</h3>
+              <p>Análisis inferencial sobre fechas de audiencia de los pozos.</p>
+              <a href="https://rpubs.com/Dally/1449076" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Ordinal</span>
+              <h3>FECHA DE CONFIDENCIALIDAD</h3>
+              <p>Fecha de finalización de la confidencialidad del pozo.</p>
+              <a href="https://rpubs.com/Dally/1449089" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Ordinal</span>
+              <h3>FECHA DE ESTADO</h3>
+              <p>Análisis inferencial del cambio temporal en estados del pozo.</p>
+              <a href="https://rpubs.com/Dally/1449093" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Ordinal</span>
+              <h3>SOLICITUD DE PERMISO</h3>
+              <p>Fecha de solicitud de permiso de perforación.</p>
+              <a href="https://rpubs.com/Dally/1449100" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Ordinal</span>
+              <h3>EMISIÓN DEL PERMISO</h3>
+              <p>Fecha de emisión del permiso de perforación.</p>
+              <a href="https://rpubs.com/Dally/1449102" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Ordinal</span>
+              <h3>INICIO DE PERFORACIÓN</h3>
+              <p>Fecha de inicio de la perforación del pozo.</p>
+              <a href="https://rpubs.com/Dally/1449104" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Ordinal</span>
+              <h3>FECHA DE PROFUNDIDAD TOTAL</h3>
+              <p>Fecha en que se alcanzó la profundidad total del pozo.</p>
+              <a href="https://rpubs.com/Dally/1449105" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Ordinal</span>
+              <h3>FINALIZACIÓN DEL POZO</h3>
+              <p>Fecha de finalización del pozo.</p>
+              <a href="https://rpubs.com/Dally/1449108" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Ordinal</span>
+              <h3>FECHA DEL SELLADO</h3>
+              <p>Fecha del sellado del pozo.</p>
+              <a href="https://rpubs.com/Dally/1449143" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+          </div>
+        </div>
+
+        <div class="variables-grupo">
+          <h3>Variables Cuantitativas</h3>
+
+          <h4>Continuas</h4>
+          <div class="rpubs-grid">
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Continua</span>
+              <h3>PROFUNDIDAD VERTICAL REAL</h3>
+              <p>Inferencia e intervalos sobre profundidad vertical real.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1448174" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Continua</span>
+              <h3>PROFUNDIDAD PERFORADA (LOGNORMAL)</h3>
+              <p>Modelo lognormal e inferencia de profundidad perforada.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1448164" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Continua</span>
+              <h3>TARIFA DE PERMISO (EXPONENCIAL)</h3>
+              <p>Modelo exponencial e inferencia de tarifas regulatorias.</p>
+              <a href="https://rpubs.com/Jennifer_oyasa/1448298" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Continua</span>
+              <h3>TARIFA DE PROFUNDIDAD</h3>
+              <p>Inferencia estadística sobre aranceles por profundidad.</p>
+              <a href="https://rpubs.com/jenni-oyasa/1438056" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+          </div>
+
+          <h4>Discretas</h4>
+          <div class="rpubs-grid">
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Discreta</span>
+              <h3>DÉCADA DE FINALIZACIÓN</h3>
+              <p>Inferencia estadística sobre tendencias por décadas de cierre.</p>
+              <a href="https://rpubs.com/eduloayza41/1448280" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Discreta</span>
+              <h3>MES DE FINALIZACIÓN</h3>
+              <p>Inferencia sobre la distribución mensual de finalización de pozos.</p>
+              <a href="https://rpubs.com/eduloayza41/1448676" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+            <article class="rpub-card">
+              <span class="mini-etiqueta">Inferencial · Discreta</span>
+              <h3>DESVÍO</h3>
+              <p>Análisis inferencial sobre el desvío en pozos.</p>
+              <a href="https://rpubs.com/eduloayza41/1448683" class="btn-link" target="_blank" rel="noopener">Ver reporte</a>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <div id="seccion-regresion" class="pantalla">
+      <section class="subhero" style="background-image: url('img/img4.jpeg');">
+        <div class="subhero-overlay"></div>
+        <div class="subhero-content">
+          <span class="section-tag">Estimación</span>
+          <h2>Modelos de Regresión</h2>
+          <p>Modelado de relaciones entre variables técnicas, profundidades y costos.</p>
+        </div>
+      </section>
+
+      <section class="section-box">
+        <div class="section-head">
+          <span class="section-tag">Ajuste de Modelos</span>
+          <h2>Modelos de Regresión Simple y Múltiple</h2>
+          <p>Tarjetas dinámicas con formulación matemática y acceso a reportes en RPubs.</p>
+        </div>
+
+        <div class="regresion-grid">
+
+          <article class="regresion-card">
+            <div class="regresion-header">
+              <div class="regresion-icon-box">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="regresion-tags-wrap">
+                <span class="tag-regresion simple">Regresión Simple</span>
+                <span class="tag-regresion rpubs"><i class="fas fa-book"></i> RPubs</span>
+              </div>
+            </div>
+            <div class="regresion-body">
+              <h3>Regresión Lineal</h3>
+            </div>
+            <a href="https://rpubs.com/jennycord/r_lineal" class="btn-regresion btn-rpubs" target="_blank" rel="noopener">
+              <i class="fas fa-chart-line"></i> Ver análisis RPubs
+            </a>
+          </article>
+
+          <article class="regresion-card">
+            <div class="regresion-header">
+              <div class="regresion-icon-box">
+                <i class="fas fa-arrow-trend-up"></i>
+              </div>
+              <div class="regresion-tags-wrap">
+                <span class="tag-regresion simple">Regresión Simple</span>
+                <span class="tag-regresion rpubs"><i class="fas fa-book"></i> RPubs</span>
+              </div>
+            </div>
+            <div class="regresion-body">
+              <h3>Regresión Potencial</h3>
+            </div>
+            <a href="https://rpubs.com/eduloayza41/1448744" class="btn-regresion btn-rpubs" target="_blank" rel="noopener">
+              <i class="fas fa-chart-line"></i> Ver análisis RPubs
+            </a>
+          </article>
+
+          <article class="regresion-card">
+            <div class="regresion-header">
+              <div class="regresion-icon-box">
+                <i class="fas fa-wave-square"></i>
+              </div>
+              <div class="regresion-tags-wrap">
+                <span class="tag-regresion simple">Regresión Simple</span>
+                <span class="tag-regresion rpubs"><i class="fas fa-book"></i> RPubs</span>
+              </div>
+            </div>
+            <div class="regresion-body">
+              <h3>Regresión Exponencial</h3>
+            </div>
+            <a href="https://rpubs.com/Dally/1449463" class="btn-regresion btn-rpubs" target="_blank" rel="noopener">
+              <i class="fas fa-chart-line"></i> Ver análisis RPubs
+            </a>
+          </article>
+
+          <article class="regresion-card">
+            <div class="regresion-header">
+              <div class="regresion-icon-box">
+                <i class="fas fa-calculator"></i>
+              </div>
+              <div class="regresion-tags-wrap">
+                <span class="tag-regresion simple">Regresión Simple</span>
+                <span class="tag-regresion rpubs"><i class="fas fa-book"></i> RPubs</span>
+              </div>
+            </div>
+            <div class="regresion-body">
+              <h3>Regresión Logarítmica</h3>
+            </div>
+            <a href="https://rpubs.com/Jennifer_oyasa/1448159" class="btn-regresion btn-rpubs" target="_blank" rel="noopener">
+              <i class="fas fa-chart-line"></i> Ver modelo logarítmico
+            </a>
+          </article>
+
+          <article class="regresion-card">
+            <div class="regresion-header">
+              <div class="regresion-icon-box">
+                <i class="fas fa-bezier-curve"></i>
+              </div>
+              <div class="regresion-tags-wrap">
+                <span class="tag-regresion simple">Regresión Simple</span>
+                <span class="tag-regresion rpubs"><i class="fas fa-book"></i> RPubs</span>
+              </div>
+            </div>
+            <div class="regresion-body">
+              <h3>Regresión Polinómica</h3>
+            </div>
+            <a href="https://rpubs.com/Dally/1448746" class="btn-regresion btn-rpubs" target="_blank" rel="noopener">
+              <i class="fas fa-chart-line"></i> Ver modelo polinómico
+            </a>
+          </article>
+
+          <article class="regresion-card">
+            <div class="regresion-header">
+              <div class="regresion-icon-box">
+                <i class="fas fa-cubes"></i>
+              </div>
+              <div class="regresion-tags-wrap">
+                <span class="tag-regresion multiple">Regresión Múltiple</span>
+                <span class="tag-regresion rpubs"><i class="fas fa-book"></i> RPubs</span>
+              </div>
+            </div>
+            <div class="regresion-body">
+              <h3>Regresión Múltiple en 3D</h3>
+            </div>
+            <a href="https://rpubs.com/Dally/1448510" class="btn-regresion btn-rpubs" target="_blank" rel="noopener">
+              <i class="fas fa-cube"></i> Ver modelo 3D RPubs
+            </a>
+          </article>
+
+        </div>
+      </section>
+    </div>
+
+
+    <div id="seccion-machine" class="pantalla">
+      <section class="subhero" style="background-image: url('img/img3.jpeg');">
+        <div class="subhero-overlay"></div>
+        <div class="subhero-content">
+          <span class="section-tag">Predicción</span>
+          <h2>Machine Learning</h2>
+          <p>Algoritmos predictivos, clasificación avanzada y modelos de aprendizaje automático.</p>
+        </div>
+      </section>
+
+
+      <section class="objetivos-editorial section-box">
+        <div class="section-head center" style="margin-bottom: 40px; text-align: center;">
+          <span class="section-tag">Modelo de Deep Learning</span>
+          <h2>Redes Neuronales Artificiales</h2>
+        </div>
+        <div class="objetivos-wrap">
+          <article class="bloque-principal" style="margin-bottom: 2.5rem;">
+            <span class="objetivo-kicker">01 · Planteamiento</span>
+            <h2>Planteamiento del problema</h2>
+            <p>
+              En la industria petrolera, estimar la profundidad de los pozos es un reto por la no linealidad y el desbalance en los datos históricos. Para superar estas limitaciones, se utiliza Machine Learning mediante redes neuronales profundas y perceptrones multicapa procesando variables geográficas y temporales clave. Este enfoque permite optimizar la planificación técnica y mejorar la precisión en las estimaciones.
+            </p>
+          </article>
+          
+          <article class="bloque-principal" style="margin-bottom: 2.5rem;">
+            <span class="objetivo-kicker">02 · Propósito</span>
+            <h2>Objetivos</h2>
+            <p>
+              Desarrollar e implementar modelos de redes neuronales profundas (tanto de clasificación como de regresión) basados en variables de entrada como la latitud, la longitud, la elevación y el año de terminación, para predecir y clasificar de forma precisa la profundidad vertical real (True Vertical Depth) en pozos petroleros.
+            </p>
+          </article>
+
+          <article class="bloque-principal">
+            <span class="objetivo-kicker">03 · Resultados</span>
+            <h2>Conclusiones</h2>
+            <p>
+              El uso de redes neuronales profundas permitió procesar datos históricos masivos de pozos y capturar relaciones no lineales complejas. Asimismo, se logró resolver el desbalance de clases de forma efectiva, mientras que las estrategias de regularización aseguraron un alto nivel de generalización sin sobreajuste, permitiendo finalmente integrar herramientas interactivas para consultas en tiempo real y optimizar la toma de decisiones técnicas.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-box" style="padding-top: 0;">
+        <div class="section-head">
+          <span class="section-tag">Prompting</span>
+          <h2>Prompt REDES NEURONALES</h2>
+          <p>Instrucción diseñada para generar un modelo avanzado de Machine Learning y su respectiva interfaz interactiva.</p>
+        </div>
+        <div style="background: rgba(0, 0, 0, 0.4); padding: 30px; border-radius: 12px; border-left: 5px solid #00f2fe; margin: 0 auto; max-width: 900px; font-family: monospace; color: #e0e0e0; line-height: 1.8; font-size: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); overflow-x: auto;">
+          <div style="color: #66d9ef; margin-bottom: 15px; font-weight: bold; font-size: 16px;">&gt; Eres un experto senior en Machine Learning e Ingeniería de Petróleos. Necesito que desarrolles un script completo en Python (utilizando librerías como Pandas, Scikit-Learn y TensorFlow/Keras) para construir un modelo de Red Neuronal Artificial (ANN).</div>
+          <div style="color: #a6e22e; margin-bottom: 10px;">&gt; El script debe contemplar dos enfoques basados en el dataset histórico:</div>
+          <ul style="list-style-type: none; padding-left: 20px; margin-bottom: 20px; color: #e6db74;">
+            <li>1. <strong style="color:#fd971f;">Modelo de Clasificación:</strong> Para agrupar y clasificar la profundidad del pozo en categorías (BAJA, MEDIA, ALTA).</li>
+            <li>2. <strong style="color:#fd971f;">Modelo de Regresión:</strong> Para predecir el valor continuo de la profundidad.</li>
+          </ul>
+          <div style="color: #a6e22e; margin-bottom: 10px;">&gt; Utiliza estrictamente las siguientes variables específicas del dataset:</div>
+          <ul style="list-style-type: none; padding-left: 20px; margin-bottom: 20px; color: #e6db74;">
+            <li style="margin-bottom: 8px;">&bull; <strong style="color:#fd971f;">Variables de Entrada / Predictoras (X):</strong> Surface Latitude (Latitud de superficie), Surface Longitude (Longitud de superficie), Elevation, ft (Elevación en pies sobre el nivel del mar) y Completion Year (Año de terminación u operación).</li>
+            <li>&bull; <strong style="color:#fd971f;">Variable de Salida / Objetivo (Y):</strong> True Vertical Depth, ft (Profundidad Vertical Real en pies / TVD).</li>
+          </ul>
+          <div style="color: #a6e22e; margin-bottom: 10px;">&gt; Organiza estrictamente el código por secciones utilizando comentarios claros de Markdown o separadores en el siguiente orden lógico:</div>
+          <ul style="list-style-type: none; padding-left: 20px; margin-bottom: 0; color: #f92672;">
+            <li>1. Librerías</li>
+            <li>2. Carga de Dataset</li>
+            <li>3. Procesamiento y Limpieza de datos</li>
+            <li>4. División de Datos</li>
+            <li>5. Modelo</li>
+            <li>6. Entrenamiento</li>
+            <li>7. Evaluación</li>
+            <li>8. Gráficas del Modelo</li>
+            <li>9. Predicción</li>
+            <li>10. Interfaz Gráfica / Aplicación (Creación de una aplicación interactiva web simple en Python utilizando Streamlit o Gradio basada en el modelo entrenado para ingresar las 4 variables de entrada y visualizar la profundidad estimada de forma visual).</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section-box" style="padding: 60px 40px;">
+        <div style="text-align: center; margin-bottom: 50px;">
+          <h2 style="font-size: 2.4rem; font-weight: 900; letter-spacing: 0.12em; color: #f7f8fa; text-transform: uppercase;">METODOLOGÍA</h2>
+          <div style="width: 130px; height: 3px; background: linear-gradient(90deg, #F39F5A, #AE445A); margin: 14px auto 0; border-radius: 2px;"></div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; gap: 8px; margin-bottom: 0;">
+
+          <div style="background:#0B1120; border:1px solid #1e293b; border-radius:14px; padding:22px 14px 18px; width:130px; min-width:110px; text-align:center; display:flex; flex-direction:column; align-items:center; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+            <div style="width:46px;height:46px;border-radius:50%;border:1.5px solid #F39F5A;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#F39F5A;margin-bottom:10px;"><i class="fas fa-book-open"></i></div>
+            <div style="font-size:1.9rem;font-weight:800;color:#F39F5A;line-height:1;">01</div>
+            <div style="font-size:0.68rem;font-weight:700;color:#f7f8fa;text-transform:uppercase;letter-spacing:0.05em;margin:8px 0 10px;line-height:1.35;">CARGAR<br>LIBRERÍAS</div>
+            <div style="width:26px;height:3px;background:linear-gradient(90deg,#F39F5A,#AE445A);border-radius:2px;"></div>
+          </div>
+
+          <i class="fas fa-arrow-right" style="color:#f7f8fa;font-size:1rem;opacity:0.7;flex-shrink:0;"></i>
+
+          <div style="background:#0B1120; border:1px solid #1e293b; border-radius:14px; padding:22px 14px 18px; width:130px; min-width:110px; text-align:center; display:flex; flex-direction:column; align-items:center; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+            <div style="width:46px;height:46px;border-radius:50%;border:1.5px solid #F39F5A;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#F39F5A;margin-bottom:10px;"><i class="fas fa-database"></i></div>
+            <div style="font-size:1.9rem;font-weight:800;color:#F39F5A;line-height:1;">02</div>
+            <div style="font-size:0.68rem;font-weight:700;color:#f7f8fa;text-transform:uppercase;letter-spacing:0.05em;margin:8px 0 10px;line-height:1.35;">CARGAR<br>DATA SET</div>
+            <div style="width:26px;height:3px;background:linear-gradient(90deg,#F39F5A,#AE445A);border-radius:2px;"></div>
+          </div>
+
+          <i class="fas fa-arrow-right" style="color:#f7f8fa;font-size:1rem;opacity:0.7;flex-shrink:0;"></i>
+
+          <div style="background:#0B1120; border:1px solid #1e293b; border-radius:14px; padding:22px 14px 18px; width:130px; min-width:110px; text-align:center; display:flex; flex-direction:column; align-items:center; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+            <div style="width:46px;height:46px;border-radius:50%;border:1.5px solid #F39F5A;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#F39F5A;margin-bottom:10px;"><i class="fas fa-cog"></i></div>
+            <div style="font-size:1.9rem;font-weight:800;color:#F39F5A;line-height:1;">03</div>
+            <div style="font-size:0.68rem;font-weight:700;color:#f7f8fa;text-transform:uppercase;letter-spacing:0.05em;margin:8px 0 10px;line-height:1.35;">PROCESAMIENTO<br>DE DATOS</div>
+            <div style="width:26px;height:3px;background:linear-gradient(90deg,#F39F5A,#AE445A);border-radius:2px;"></div>
+          </div>
+
+          <i class="fas fa-arrow-right" style="color:#f7f8fa;font-size:1rem;opacity:0.7;flex-shrink:0;"></i>
+
+          <div style="background:#0B1120; border:1px solid #1e293b; border-radius:14px; padding:22px 14px 18px; width:130px; min-width:110px; text-align:center; display:flex; flex-direction:column; align-items:center; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+            <div style="width:46px;height:46px;border-radius:50%;border:1.5px solid #F39F5A;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#F39F5A;margin-bottom:10px;"><i class="fas fa-chart-pie"></i></div>
+            <div style="font-size:1.9rem;font-weight:800;color:#F39F5A;line-height:1;">04</div>
+            <div style="font-size:0.68rem;font-weight:700;color:#f7f8fa;text-transform:uppercase;letter-spacing:0.05em;margin:8px 0 10px;line-height:1.35;">DIVISIÓN<br>DE DATOS</div>
+            <div style="width:26px;height:3px;background:linear-gradient(90deg,#F39F5A,#AE445A);border-radius:2px;"></div>
+          </div>
+
+          <i class="fas fa-arrow-right" style="color:#f7f8fa;font-size:1rem;opacity:0.7;flex-shrink:0;"></i>
+
+          <div style="background:#0B1120; border:1px solid #1e293b; border-radius:14px; padding:22px 14px 18px; width:130px; min-width:110px; text-align:center; display:flex; flex-direction:column; align-items:center; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+            <div style="width:46px;height:46px;border-radius:50%;border:1.5px solid #F39F5A;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#F39F5A;margin-bottom:10px;"><i class="fas fa-cube"></i></div>
+            <div style="font-size:1.9rem;font-weight:800;color:#F39F5A;line-height:1;">05</div>
+            <div style="font-size:0.68rem;font-weight:700;color:#f7f8fa;text-transform:uppercase;letter-spacing:0.05em;margin:8px 0 10px;line-height:1.35;">MODELO</div>
+            <div style="width:26px;height:3px;background:linear-gradient(90deg,#F39F5A,#AE445A);border-radius:2px;"></div>
+          </div>
+
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; padding-right: calc(50% - 340px); margin: 4px 0;">
+          <i class="fas fa-arrow-down" style="color:#f7f8fa;font-size:1rem;opacity:0.7;"></i>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; gap: 8px; flex-direction: row-reverse;">
+
+          <div style="background:#0B1120; border:1px solid #1e293b; border-radius:14px; padding:22px 14px 18px; width:130px; min-width:110px; text-align:center; display:flex; flex-direction:column; align-items:center; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+            <div style="width:46px;height:46px;border-radius:50%;border:1.5px solid #F39F5A;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#F39F5A;margin-bottom:10px;"><i class="fas fa-brain"></i></div>
+            <div style="font-size:1.9rem;font-weight:800;color:#F39F5A;line-height:1;">06</div>
+            <div style="font-size:0.68rem;font-weight:700;color:#f7f8fa;text-transform:uppercase;letter-spacing:0.05em;margin:8px 0 10px;line-height:1.35;">ENTRENAMIENTO</div>
+            <div style="width:26px;height:3px;background:linear-gradient(90deg,#F39F5A,#AE445A);border-radius:2px;"></div>
+          </div>
+
+          <i class="fas fa-arrow-right" style="color:#f7f8fa;font-size:1rem;opacity:0.7;flex-shrink:0;transform:rotate(180deg);"></i>
+
+          <div style="background:#0B1120; border:1px solid #1e293b; border-radius:14px; padding:22px 14px 18px; width:130px; min-width:110px; text-align:center; display:flex; flex-direction:column; align-items:center; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+            <div style="width:46px;height:46px;border-radius:50%;border:1.5px solid #F39F5A;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#F39F5A;margin-bottom:10px;"><i class="fas fa-chart-line"></i></div>
+            <div style="font-size:1.9rem;font-weight:800;color:#F39F5A;line-height:1;">07</div>
+            <div style="font-size:0.68rem;font-weight:700;color:#f7f8fa;text-transform:uppercase;letter-spacing:0.05em;margin:8px 0 10px;line-height:1.35;">PREDICCIONES</div>
+            <div style="width:26px;height:3px;background:linear-gradient(90deg,#F39F5A,#AE445A);border-radius:2px;"></div>
+          </div>
+
+          <i class="fas fa-arrow-right" style="color:#f7f8fa;font-size:1rem;opacity:0.7;flex-shrink:0;transform:rotate(180deg);"></i>
+
+          <div style="background:#0B1120; border:1px solid #1e293b; border-radius:14px; padding:22px 14px 18px; width:130px; min-width:110px; text-align:center; display:flex; flex-direction:column; align-items:center; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+            <div style="width:46px;height:46px;border-radius:50%;border:1.5px solid #F39F5A;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#F39F5A;margin-bottom:10px;"><i class="fas fa-clipboard-check"></i></div>
+            <div style="font-size:1.9rem;font-weight:800;color:#F39F5A;line-height:1;">08</div>
+            <div style="font-size:0.68rem;font-weight:700;color:#f7f8fa;text-transform:uppercase;letter-spacing:0.05em;margin:8px 0 10px;line-height:1.35;">EVALUACIÓN</div>
+            <div style="width:26px;height:3px;background:linear-gradient(90deg,#F39F5A,#AE445A);border-radius:2px;"></div>
+          </div>
+
+          <i class="fas fa-arrow-right" style="color:#f7f8fa;font-size:1rem;opacity:0.7;flex-shrink:0;transform:rotate(180deg);"></i>
+
+          <div style="background:#0B1120; border:1px solid #1e293b; border-radius:14px; padding:22px 14px 18px; width:130px; min-width:110px; text-align:center; display:flex; flex-direction:column; align-items:center; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+            <div style="width:46px;height:46px;border-radius:50%;border:1.5px solid #F39F5A;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#F39F5A;margin-bottom:10px;"><i class="fas fa-chart-bar"></i></div>
+            <div style="font-size:1.9rem;font-weight:800;color:#F39F5A;line-height:1;">09</div>
+            <div style="font-size:0.68rem;font-weight:700;color:#f7f8fa;text-transform:uppercase;letter-spacing:0.05em;margin:8px 0 10px;line-height:1.35;">VISUALIZACIÓN<br>RESULTADOS</div>
+            <div style="width:26px;height:3px;background:linear-gradient(90deg,#F39F5A,#AE445A);border-radius:2px;"></div>
+          </div>
+
+          <i class="fas fa-arrow-right" style="color:#f7f8fa;font-size:1rem;opacity:0.7;flex-shrink:0;transform:rotate(180deg);"></i>
+
+          <div style="background:#0B1120; border:1px solid #1e293b; border-radius:14px; padding:22px 14px 18px; width:130px; min-width:110px; text-align:center; display:flex; flex-direction:column; align-items:center; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+            <div style="width:46px;height:46px;border-radius:50%;border:1.5px solid #F39F5A;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#F39F5A;margin-bottom:10px;"><i class="fas fa-bullseye"></i></div>
+            <div style="font-size:1.9rem;font-weight:800;color:#F39F5A;line-height:1;">10</div>
+            <div style="font-size:0.68rem;font-weight:700;color:#f7f8fa;text-transform:uppercase;letter-spacing:0.05em;margin:8px 0 10px;line-height:1.35;">CONCLUSIÓN</div>
+            <div style="width:26px;height:3px;background:linear-gradient(90deg,#F39F5A,#AE445A);border-radius:2px;"></div>
+          </div>
+
+        </div>
+      </section>
+
+
+
+      <section class="section-box">
+        <div class="section-head">
+          <h2>Modelos Implementados</h2>
+          <p>Cuadernos interactivos en Google Colab y reportes de Machine Learning en RPubs.</p>
+        </div>
+
+        <div class="regresion-grid">
+          
+          <article class="regresion-card ml-card">
+            <div class="regresion-header">
+              <div class="regresion-icon-box">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div class="regresion-tags-wrap">
+                <span class="tag-regresion ml">Machine Learning</span>
+                <span class="tag-regresion colab"><i class="fab fa-google"></i> Colab</span>
+              </div>
+            </div>
+            <div class="regresion-body">
+              <h3>Regresión</h3>
+              <p>Modelo de regresión supervisada con algoritmos de aprendizaje automático para la predicción precisa de continuos.</p>
+            </div>
+            <a href="https://colab.research.google.com/drive/1JjI9LKDjz-6r_I0l_ytkHVgco_UzBGM7?usp=sharing" class="btn-regresion btn-colab" target="_blank" rel="noopener">
+              <i class="fab fa-python"></i> Abrir en Google Colab
+            </a>
+          </article>
+
+
+
+          <article class="regresion-card ml-card">
+            <div class="regresion-header">
+              <div class="regresion-icon-box">
+                <i class="fas fa-sitemap"></i>
+              </div>
+              <div class="regresion-tags-wrap">
+                <span class="tag-regresion ml">Machine Learning</span>
+                <span class="tag-regresion colab"><i class="fab fa-google"></i> Colab</span>
+              </div>
+            </div>
+            <div class="regresion-body">
+              <h3>Clasificación</h3>
+              <p>Modelo predictivo supervisado enfocado en la categorización y clasificación de pozos del estado de Nueva York.</p>
+            </div>
+            <a href="https://colab.research.google.com/drive/1xsZR2ZAODZaXamE5OaMpFW9mEtBlWaV7?usp=sharing" class="btn-regresion btn-colab" target="_blank" rel="noopener">
+              <i class="fab fa-python"></i> Abrir en Google Colab
+            </a>
+          </article>
+
+        </div>
+      </section>
+
+      <hr style="border: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(243, 159, 90, 0.5), transparent); margin: 20px auto 0; max-width: 800px;">
+
+      <section class="objetivos-editorial section-box">
+        <div class="section-head center" style="margin-bottom: 40px; text-align: center;">
+          <span class="section-tag">Modelo de Ensamble</span>
+          <h2>Random Forest</h2>
+        </div>
+        <div class="objetivos-wrap">
+          <article class="bloque-principal" style="margin-bottom: 2.5rem;">
+            <span class="objetivo-kicker">01 · Planteamiento</span>
+            <h2>Planteamiento del Problema</h2>
+            <p>
+              En la industria petrolera, la perforación de pozos requiere estimar la profundidad con precisión para optimizar las operaciones. Sin embargo, los métodos convencionales enfrentan desafíos al analizar grandes volúmenes de datos históricos debido a su alta no linealidad y complejidad estructural.
+            </p>
+            <p>
+              Para resolver estas incertidumbres técnicas, el uso de Machine Learning —específicamente algoritmos basados en árboles de decisión— permite procesar múltiples variables geológicas, geográficas y operativas clave para predecir de forma confiable la profundidad de los pozos.
+            </p>
+            <p>
+              Mediante la implementación de un modelo de Random Forest, este enfoque busca optimizar la planificación técnica y mejorar la precisión en la estimación de profundidades.
+            </p>
+          </article>
+
+          <article class="bloque-principal" style="margin-bottom: 2.5rem;">
+            <span class="objetivo-kicker">02 · Propósito</span>
+            <h2>Objetivo</h2>
+            <p>
+              Desarrollar e implementar un modelo de aprendizaje supervisado mediante el algoritmo Random Forest, utilizando variables geológicas y operativas, para predecir con alta precisión la profundidad vertical real (True Vertical Depth) en pozos petroleros.
+            </p>
+          </article>
+
+          <article class="bloque-principal">
+            <span class="objetivo-kicker">03 · Resultados</span>
+            <h2>Conclusiones</h2>
+            <p>
+              El uso del modelo Random Forest permitió procesar datos históricos masivos de pozos y capturar relaciones no lineales complejas entre las variables geológicas y operativas. Asimismo, se logró un alto nivel de ajuste predictivo sin sobreajuste, validado mediante métricas de desempeño robustas, permitiendo identificar las variables de mayor impacto en la estimación para optimizar la toma de decisiones técnicas en la industria petrolera.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-box" style="padding-top: 0; padding-bottom: 20px;">
+        <div class="rf-diagram-container">
+          
+          <div class="rf-diagram-header">
+            <span class="rf-diagram-tag">Diagrama de Arquitectura</span>
+            <h3>Arquitectura Conceptual de Random Forest (Funcionamiento Interno)</h3>
+            <p>Ilustración del funcionamiento interno del algoritmo Random Forest desde la entrada de datos del subsuelo hasta la predicción final.</p>
+          </div>
+
+          <div class="rf-steps-bar">
+            <div class="rf-step-title">
+              <span class="rf-step-num">1</span> ENTRADA DE DATOS
+            </div>
+            <div class="rf-step-title">
+              <span class="rf-step-num">2</span> MUESTREO (BOOTSTRAP)
+            </div>
+            <div class="rf-step-title">
+              <span class="rf-step-num">3</span> BOSQUE DE ÁRBOLES
+            </div>
+            <div class="rf-step-title">
+              <span class="rf-step-num">4</span> AGREGACIÓN FINAL
+            </div>
+          </div>
+
+          <div class="rf-flow-grid">
+            
+            <div class="rf-col rf-col-1">
+              <div>
+                <div class="rf-col-head">
+                  <i class="fas fa-database"></i>
+                  <h4>Variables del Subsuelo</h4>
+                </div>
+                <div class="rf-var-list">
+                  <div class="rf-var-item"><i class="fas fa-mountain"></i> Elevation</div>
+                  <div class="rf-var-item"><i class="fas fa-location-dot"></i> Surface Longitude</div>
+                  <div class="rf-var-item"><i class="fas fa-location-crosshairs"></i> Surface Latitude</div>
+                  <div class="rf-var-item"><i class="fas fa-map-pin"></i> County</div>
+                  <div class="rf-var-item"><i class="fas fa-compass"></i> Region</div>
+                  <div class="rf-var-item"><i class="fas fa-oil-well"></i> Well Type</div>
+                  <div class="rf-var-item"><i class="fas fa-dharmachakra"></i> Original Well Type</div>
+                  <div class="rf-var-item"><i class="fas fa-layer-group"></i> Objective Formation</div>
+                  <div class="rf-var-item"><i class="fas fa-gears"></i> Producing Formation</div>
+                  <div class="rf-var-item"><i class="fas fa-ruler-combined"></i> Slant</div>
+                  <div class="rf-var-item"><i class="fas fa-border-all"></i> Spacing Acres</div>
+                  <div class="rf-var-item" style="justify-content: center; color: #94a3b8;"><i class="fas fa-ellipsis"></i></div>
+                </div>
+              </div>
+              <div class="rf-badge-dataset">
+                Dataset Completo<br><span style="font-weight: 400; font-size: 0.72rem; color: #cbd5e1;">(N observaciones)</span>
+              </div>
+            </div>
+
+            <div class="rf-col rf-col-2">
+              <div>
+                <div class="rf-col-head">
+                  <i class="fas fa-cubes-stacked"></i>
+                  <h4>Muestreo Bootstrap</h4>
+                </div>
+                <p class="rf-bootstrap-desc">Se generan múltiples subconjuntos de datos aleatorios del mismo tamaño que el dataset original (con reemplazo).</p>
+                <div class="rf-subsets-list">
+                  <div class="rf-subset-card">
+                    <strong>Subconjunto 1 (Bootstrap 1)</strong>
+                    <div class="rf-dots-row">
+                      <span class="rf-dot rf-dot-p"></span>
+                      <span class="rf-dot rf-dot-o"></span>
+                      <span class="rf-dot rf-dot-b"></span>
+                      <span class="rf-dot rf-dot-g"></span>
+                      <span class="rf-dot rf-dot-p"></span>
+                    </div>
+                  </div>
+                  <div class="rf-subset-card">
+                    <strong>Subconjunto 2 (Bootstrap 2)</strong>
+                    <div class="rf-dots-row">
+                      <span class="rf-dot rf-dot-b"></span>
+                      <span class="rf-dot rf-dot-g"></span>
+                      <span class="rf-dot rf-dot-p"></span>
+                      <span class="rf-dot rf-dot-o"></span>
+                      <span class="rf-dot rf-dot-b"></span>
+                    </div>
+                  </div>
+                  <div style="text-align: center; color: #a855f7; font-weight: bold; margin: 2px 0;">⋮</div>
+                  <div class="rf-subset-card">
+                    <strong>Subconjunto B (Bootstrap B)</strong>
+                    <div class="rf-dots-row">
+                      <span class="rf-dot rf-dot-o"></span>
+                      <span class="rf-dot rf-dot-p"></span>
+                      <span class="rf-dot rf-dot-g"></span>
+                      <span class="rf-dot rf-dot-b"></span>
+                      <span class="rf-dot rf-dot-o"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="rf-bagging-note">
+                <strong>B = 500 árboles (ejemplo)</strong><br>Cada subconjunto es de tamaño N (muestreo con reemplazo).
+              </div>
+            </div>
+
+            <div class="rf-col rf-col-3">
+              <div>
+                <div class="rf-col-head">
+                  <i class="fas fa-diagram-project"></i>
+                  <h4>Bosque de Árboles</h4>
+                </div>
+                <div class="rf-trees-container">
+                  <div class="rf-tree-mini-card">
+                    <div class="rf-tree-title">Árbol 1</div>
+                    <span class="rf-tree-split">Split: Elevation</span>
+                    <div class="rf-tree-diagram-icon"><i class="fas fa-sitemap"></i></div>
+                    <div class="rf-tree-out">Predicción 1 (y₁)</div>
+                  </div>
+                  <div class="rf-tree-mini-card">
+                    <div class="rf-tree-title">Árbol 2</div>
+                    <span class="rf-tree-split">Split: Well_Type</span>
+                    <div class="rf-tree-diagram-icon"><i class="fas fa-sitemap"></i></div>
+                    <div class="rf-tree-out">Predicción 2 (y₂)</div>
+                  </div>
+                  <div style="text-align: center; color: #60a5fa; font-weight: bold; margin: 2px 0;">...</div>
+                  <div class="rf-tree-mini-card">
+                    <div class="rf-tree-title">Árbol 500</div>
+                    <span class="rf-tree-split">Split: County</span>
+                    <div class="rf-tree-diagram-icon"><i class="fas fa-sitemap"></i></div>
+                    <div class="rf-tree-out">Predicción 500 (y₅₀₀)</div>
+                  </div>
+                </div>
+              </div>
+              <div class="rf-trees-info">
+                <i class="fas fa-tree" style="color: #60a5fa; margin-right: 4px;"></i> <strong>En cada nodo:</strong>
+                <ul>
+                  <li>Muestreo aleatorio de variables (mtry).</li>
+                  <li>Mejor split por Impureza Gini o Varianza.</li>
+                  <li>Crecimiento hasta nodo terminal sin poda.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="rf-col rf-col-4">
+              <div>
+                <div class="rf-col-head">
+                  <i class="fas fa-chart-pie"></i>
+                  <h4>Agregación Final</h4>
+                </div>
+                <div class="rf-agg-section">
+                  <div class="rf-agg-block">
+                    <div class="rf-agg-type"><i class="fas fa-calculator"></i> Si es Regresión</div>
+                    <div class="rf-formula-display">
+                      $$\hat{y} = \frac{1}{B} \sum_{b=1}^{B} y_b$$
+                    </div>
+                    <div class="rf-final-res">
+                      <i class="fas fa-arrow-down" style="display:block; margin-bottom: 2px;"></i>
+                      Predicción Final (Profundidad ft)
+                    </div>
+                  </div>
+
+                  <div class="rf-agg-block">
+                    <div class="rf-agg-type"><i class="fas fa-tags"></i> Si es Clasificación</div>
+                    <div class="rf-agg-sub">Votación Mayoritaria (Majority Vote)</div>
+                    <div class="rf-dots-row" style="margin: 6px 0;">
+                      <span class="rf-dot rf-dot-p"></span>
+                      <span class="rf-dot rf-dot-p"></span>
+                      <span class="rf-dot rf-dot-p"></span>
+                      <span class="rf-dot rf-dot-o"></span>
+                    </div>
+                    <div class="rf-final-res" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2)); border-color: rgba(168, 85, 247, 0.5);">
+                      <i class="fas fa-arrow-down" style="display:block; margin-bottom: 2px;"></i>
+                      Clase Final Predicha (Tipo Pozo)
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="rf-legend-grid">
+            <div class="rf-legend-card">
+              <i class="fas fa-box-archive"></i>
+              <div class="rf-legend-content">
+                <h5>Bagging (Bootstrap Aggregating)</h5>
+                <p>Reduce la varianza y el sobreajuste mediante muestreo aleatorio con reemplazo.</p>
+              </div>
+            </div>
+            <div class="rf-legend-card">
+              <i class="fas fa-dice"></i>
+              <div class="rf-legend-content">
+                <h5>Random Subspace (mtry)</h5>
+                <p>En cada split evalúa solo mtry variables aleatorias para decorrelacionar los árboles.</p>
+              </div>
+            </div>
+            <div class="rf-legend-card">
+              <i class="fas fa-tree"></i>
+              <div class="rf-legend-content">
+                <h5>Árboles Débiles → Modelo Fuerte</h5>
+                <p>Menor varianza, mayor estabilidad y alta capacidad de generalización predictiva.</p>
+              </div>
+            </div>
+            <div class="rf-legend-card">
+              <i class="fas fa-bullseye"></i>
+              <div class="rf-legend-content">
+                <h5>Salidas del Algoritmo</h5>
+                <p>Regresión: Promedio numérico (media)<br>Clasificación: Votación mayoritaria</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="section-box" style="padding-top: 0;">
+        <div class="regresion-grid" style="max-width: 860px; margin: 0 auto; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
+
+          <article class="regresion-card ml-card" style="flex: 1; min-width: 280px; max-width: 400px;">
+            <div class="regresion-header">
+              <div class="regresion-icon-box">
+                <i class="fas fa-sitemap"></i>
+              </div>
+              <div class="regresion-tags-wrap">
+                <span class="tag-regresion ml">Clasificación</span>
+                <span class="tag-regresion rpubs"><i class="fas fa-book"></i> RPubs</span>
+              </div>
+            </div>
+            <div class="regresion-body">
+              <h3>Random Forest</h3>
+              <p style="font-size: 0.9rem; color: #aaa; margin-top: 6px;">Modelo de clasificación para predecir categorías de profundidad del pozo.</p>
+            </div>
+            <a href="https://rpubs.com/jennycord/clasificacion_" class="btn-regresion btn-rpubs" target="_blank" rel="noopener">
+              <i class="fas fa-tags"></i> Ver clasificación RPubs
+            </a>
+          </article>
+
+          <article class="regresion-card ml-card" style="flex: 1; min-width: 280px; max-width: 400px;">
+            <div class="regresion-header">
+              <div class="regresion-icon-box">
+                <i class="fas fa-tree"></i>
+              </div>
+              <div class="regresion-tags-wrap">
+                <span class="tag-regresion ml">Regresión</span>
+                <span class="tag-regresion rpubs"><i class="fas fa-book"></i> RPubs</span>
+              </div>
+            </div>
+            <div class="regresion-body">
+              <h3>Random Forest</h3>
+              <p style="font-size: 0.9rem; color: #aaa; margin-top: 6px;">Modelo de regresión para predecir la profundidad vertical real de los pozos.</p>
+            </div>
+            <a href="https://rpubs.com/jennycord/random_forest_regr" class="btn-regresion btn-rpubs" target="_blank" rel="noopener">
+              <i class="fas fa-chart-line"></i> Ver regresión RPubs
+            </a>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+
+
+    <div id="seccion-nosotros" class="pantalla">
+      <section class="subhero" style="background-image: url('img/img1.jpeg');">
+        <div class="subhero-overlay"></div>
+        <div class="subhero-content">
+          <span class="section-tag">Equipo</span>
+          <h2>Sobre nosotros</h2>
+          <p>Conoce a las personas detrás del proyecto estadístico.</p>
+        </div>
+      </section>
+
+      <section class="section-box">
+        <div class="section-head">
+          <span class="section-tag">Integrantes</span>
+          <h2>Equipo de trabajo</h2>
+          <p>Estudiantes de FIGEMPA · Universidad Central del Ecuador.</p>
+        </div>
+
+        <div class="personas-grid">
+          <article class="persona-card">
+            <div class="persona-foto">
+              <img src="img/dallyana.jpg" alt="Dallyana Lozano" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="persona-fallback"><i class="fas fa-user"></i></div>
+            </div>
+            <h3>Dallyana Lozano</h3>
+            <p class="persona-rol">Estudiante FIGEMPA</p>
+            <a href="https://drive.google.com/file/d/1XHZLb9Tr8P6VH2MKlGyGCgbfcfBuOcoN/view?usp=drive_link" target="_blank" rel="noopener" class="btn-link"><i class="fas fa-file-lines"></i> Ver CV</a>
+          </article>
+
+          <article class="persona-card">
+            <div class="persona-foto">
+              <img src="img/jennifer-c.jpg" alt="Jennifer Cordones" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="persona-fallback"><i class="fas fa-user"></i></div>
+            </div>
+            <h3>Jennifer Cordones</h3>
+            <p class="persona-rol">Estudiante FIGEMPA</p>
+            <a href="https://drive.google.com/file/d/1oZnNfFaRwI6ih414KdMLGboDdC6pLe8E/view?usp=drive_link" target="_blank" rel="noopener" class="btn-link"><i class="fas fa-file-lines"></i> Ver CV</a>
+          </article>
+
+          <article class="persona-card">
+            <div class="persona-foto">
+              <img src="img/jennifer-o.jpg" alt="Jennifer Oyasa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="persona-fallback"><i class="fas fa-user"></i></div>
+            </div>
+            <h3>Jennifer Oyasa</h3>
+            <p class="persona-rol">Estudiante FIGEMPA</p>
+            <a href="https://drive.google.com/file/d/1KFHWH-AV2bc4UghUb5Saar8izzlSZsRP/view?usp=sharing" target="_blank" rel="noopener" class="btn-link"><i class="fas fa-file-lines"></i> Ver CV</a>
+          </article>
+
+          <article class="persona-card">
+            <div class="persona-foto">
+              <img src="img/eduardo.jpg" alt="Eduardo Loayza" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="persona-fallback"><i class="fas fa-user"></i></div>
+            </div>
+            <h3>Eduardo Loayza</h3>
+            <p class="persona-rol">Estudiante FIGEMPA</p>
+            <a href="https://drive.google.com/file/d/1SdVihcfT9AsxM98gap0iS8w0TfX84QnH/view?usp=drive_link" target="_blank" rel="noopener" class="btn-link"><i class="fas fa-file-lines"></i> Ver CV</a>
+          </article>
+        </div>
+      </section>
+    </div>
+
+
+    <div id="seccion-herramientas" class="pantalla">
+      <section class="subhero" style="background-image: url('img/img1.jpeg');">
+        <div class="subhero-overlay"></div>
+        <div class="subhero-content">
+          <span class="section-tag">Stack tecnológico</span>
+          <h2>Herramientas utilizadas</h2>
+          <p>Software empleado en el desarrollo del proyecto.</p>
+        </div>
+      </section>
+
+      <section class="section-box">
+        <div class="section-head">
+          <span class="section-tag">Tecnología</span>
+          <h2>Aplicaciones del proyecto</h2>
+          <p>Estas son las principales herramientas que hacen posible el análisis y la visualización.</p>
+        </div>
+
+        <div class="herramientas-grid">
+          <article class="herramienta-card">
+            <div class="herramienta-logo">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="Visual Studio Code">
+            </div>
+            <h3>Visual Studio Code</h3>
+            <p>Editor de código fuente utilizado para construir todo el sitio web (HTML, CSS y JavaScript).</p>
+            <a href="https://code.visualstudio.com" target="_blank" rel="noopener" class="btn-link">Sitio oficial</a>
+          </article>
+
+          <article class="herramienta-card">
+            <div class="herramienta-logo">
+              <img src="https://qgis.github.io/qgis-uni-navigation/logo.svg" alt="QGIS">
+            </div>
+            <h3>QGIS</h3>
+            <p>Sistema de información geográfica para el análisis espacial y la generación del mapa interactivo.</p>
+            <a href="https://qgis.org" target="_blank" rel="noopener" class="btn-link">Sitio oficial</a>
+          </article>
+
+          <article class="herramienta-card">
+            <div class="herramienta-logo">
+              <img src="https://www.kaggle.com/static/images/site-logo.svg" alt="Kaggle">
+            </div>
+            <h3>Kaggle</h3>
+            <p>Plataforma utilizada para acceder al dataset de pozos y explorar conjuntos de datos relacionados.</p>
+            <a href="https://www.kaggle.com" target="_blank" rel="noopener" class="btn-link">Sitio oficial</a>
+          </article>
+
+          <article class="herramienta-card">
+            <div class="herramienta-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Colaboratory_SVG_Logo.svg" alt="Google Colab" style="height: 48px;">
+            </div>
+            <h3>Google Colab</h3>
+            <p>Entorno de cuadernos interactivos basado en la nube para el entrenamiento de modelos de Machine Learning y visualización.</p>
+            <a href="https://colab.research.google.com/" target="_blank" rel="noopener" class="btn-link">Sitio oficial</a>
+          </article>
+
+          <article class="herramienta-card">
+            <div class="herramienta-logo">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rstudio/rstudio-original.svg" alt="RStudio" style="height: 48px;" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg'">
+            </div>
+            <h3>RStudio</h3>
+            <p>Entorno de desarrollo integrado (IDE) para R, esencial para análisis estadístico, exploración de datos y regresiones.</p>
+            <a href="https://posit.co/products/open-source/rstudio/" target="_blank" rel="noopener" class="btn-link">Sitio oficial</a>
+          </article>
+
+          <article class="herramienta-card">
+            <div class="herramienta-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive" style="height: 48px;">
+            </div>
+            <h3>Google Drive</h3>
+            <p>Servicio de almacenamiento en la nube empleado para centralizar el acceso a bases de datos y colaborar en línea.</p>
+            <a href="https://drive.google.com/" target="_blank" rel="noopener" class="btn-link">Sitio oficial</a>
+          </article>
+
+          <article class="herramienta-card">
+            <div class="herramienta-logo">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+            </div>
+            <h3>GitHub</h3>
+            <p>Plataforma para el alojamiento del código fuente, control de versiones y despliegue del proyecto web.</p>
+            <a href="https://github.com/" target="_blank" rel="noopener" class="btn-link">Sitio oficial</a>
+          </article>
+        </div>
+      </section>
+    </div>
+
+
+    <div id="seccion-conclusiones" class="pantalla">
+      <section class="subhero" style="background-image: url('img/img1.jpeg');">
+        <div class="subhero-overlay"></div>
+        <div class="subhero-content">
+          <span class="section-tag">Cierre</span>
+          <h2>Conclusiones</h2>
+          <p>Reflexiones y resultados finales del proyecto.</p>
+        </div>
+      </section>
+
+      <section class="section-box">
+        <div class="section-head">
+          <span class="section-tag">Resultados</span>
+          <h2>Hallazgos principales</h2>
+          <p>Próximamente.</p>
+        </div>
+
+        <div class="rpubs-grid">
+          <article class="rpub-card">
+            <span class="mini-etiqueta">Hallazgo</span>
+            <h3>Próximamente</h3>
+            <p>Próximamente.</p>
+          </article>
+          <article class="rpub-card">
+            <span class="mini-etiqueta">Hallazgo</span>
+            <h3>Próximamente</h3>
+            <p>Próximamente.</p>
+          </article>
+          <article class="rpub-card">
+            <span class="mini-etiqueta">Hallazgo</span>
+            <h3>Próximamente</h3>
+            <p>Próximamente.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+
+    <footer class="pie-pagina">
+      <div class="contenedor-footer">
+        <div class="col-footer">
+          <h3>Proyecto</h3>
+          <p>Este proyecto se basa en las estadísticas de regulación de pozos petroleros, gas y otros tipos del Estado de Nueva York.</p>
+        </div>
+
+        <div class="col-footer">
+          <h3>Integrantes</h3>
+          <ul class="lista-integrantes">
+            <li>Dallyana Lozano</li>
+            <li>Jennifer Cordones</li>
+            <li>Jennifer Oyasa</li>
+            <li>Eduardo Loayza</li>
+          </ul>
+        </div>
+
+        <div class="col-footer">
+          <h3>Contacto</h3>
+          <p>Universidad Central del Ecuador</p>
+          <div class="redes-sociales">
+            <a href="https://www.instagram.com/figempa_uce/" target="_blank" class="icono-red"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/Figempa/?locale=es_LA" target="_blank" class="icono-red"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/Figempa_UCE" target="_blank" class="icono-red"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Proyecto de Estadística. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+  </main>
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="tm7HrbhfB4emYnYJlNrgL";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+  <script src="script.js"></script>
+</body>
+</html>
